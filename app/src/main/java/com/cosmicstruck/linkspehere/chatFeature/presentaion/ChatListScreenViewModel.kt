@@ -4,9 +4,6 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.brendangoldberg.kotlin_jwt.KtJwtCreator
-import com.brendangoldberg.kotlin_jwt.algorithms.HSAlgorithm
-import com.cosmicstruck.linkspehere.BuildConfig
 import com.cosmicstruck.linkspehere.common.utils.user2Name
 import com.cosmicstruck.linkspehere.common.utils.user2jwt
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,7 +11,6 @@ import io.getstream.chat.android.client.ChatClient
 import io.getstream.chat.android.models.User
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import
 
 @HiltViewModel
 class ChatScreenViewModel @Inject constructor(
