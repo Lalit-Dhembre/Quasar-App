@@ -26,6 +26,14 @@ android {
         properties.load(file.inputStream())
         val STREAM_API_KEY = properties.getProperty("STREAM_SDK_API")?: ""
         val STREAM_SECRET_KEY = properties.getProperty("STREAM_SDK_SECRET")?: ""
+        val SUPABASE_KEY = properties.getProperty("SUPABASE_KEY")?: ""
+        val SUPABASE_URL = properties.getProperty("SUPABASE_URL")?: ""
+        val WEB_CLIENT_ID = properties.getProperty("WEB_CLIENT_ID")?: ""
+        val ANDROID_CLIENT_ID = properties.getProperty("ANDROID_CLIENT_ID")?:""
+        buildConfigField("String","SUPABASE_KEY",SUPABASE_KEY)
+        buildConfigField("String","SUPABASE_URL",SUPABASE_URL)
+        buildConfigField("String","WEB_CLIENT_ID",WEB_CLIENT_ID)
+        buildConfigField("String","ANDROID_CLIENT_ID",ANDROID_CLIENT_ID)
         buildConfigField("String","STREAM_SDK_API",STREAM_API_KEY)
         buildConfigField("String","STREAM_SDK_SECRET",STREAM_SECRET_KEY)
     }
@@ -99,10 +107,28 @@ dependencies {
 //Permission
     implementation("com.google.accompanist:accompanist-permissions:0.37.0")
 
+    implementation ("com.google.accompanist:accompanist-swiperefresh:0.28.0")
+
+    val supabaseVersion = "3.1.2"
+    implementation("io.github.jan-tennert.supabase:compose-auth:$supabaseVersion")
+    implementation("io.github.jan-tennert.supabase:storage-kt:$supabaseVersion")
+    implementation("io.github.jan-tennert.supabase:postgrest-kt:$supabaseVersion")
+
+
+
+    implementation(platform(libs.bom))
+    implementation(libs.postgrest.kt)
+    implementation(libs.auth.kt)
+    implementation(libs.realtime.kt)
+    implementation(libs.androidx.credentials)
+    implementation(libs.androidx.credentials.play.services.auth)
+    implementation(libs.googleid)
     implementation("androidx.compose.ui:ui-text-google-fonts:1.7.8")
     val streamChat = "6.12.0"
     implementation("io.getstream:stream-chat-android-offline:$streamChat")
     implementation("io.getstream:stream-chat-android-compose:$streamChat")
+    implementation(libs.ktor.client.android)
+
 
     implementation("com.brendangoldberg:kotlin-jwt:1.3.1")
 

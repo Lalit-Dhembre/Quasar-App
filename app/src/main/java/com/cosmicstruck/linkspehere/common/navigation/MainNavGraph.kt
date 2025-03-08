@@ -10,6 +10,7 @@ import com.cosmicstruck.linkspehere.chatFeature.presentaion.ChatsListScreen
 import com.cosmicstruck.linkspehere.homeScreen.HomeScreen
 import com.cosmicstruck.linkspehere.jobFeature.presentation.JobsScreen
 import com.cosmicstruck.linkspehere.mentorsFeature.presentation.MentorsScreen
+import com.cosmicstruck.linkspehere.profileBuilding.presentation.ProfileBuildingScreen
 
 @Composable
 fun MainNavGraph(
@@ -25,7 +26,7 @@ fun MainNavGraph(
         composable(route = Screens.LoginScreenRoute.route){
             LoginScreen(
                 navigateToRegistrationScreen = {navHostController.navigate(route = Screens.RegistrationScreenRoute.route)},
-                navigateToHomeScreen = {navHostController.navigate(route = Screens.HomeScreenRoute.route)}
+                navigateToProfileBuildingScreen = {navHostController.navigate(route = Screens.ProfileBuildingScreen.route)}
             )
         }
         composable(route = Screens.RegistrationScreenRoute.route){
@@ -41,6 +42,11 @@ fun MainNavGraph(
         }
         composable(route = Screens.JobSectionScreenRoute.route){
             JobsScreen(navHostController = navHostController)
+        }
+        composable(route = Screens.ProfileBuildingScreen.route){
+            ProfileBuildingScreen(
+                navigateToHomeScreen = {navHostController.navigate(route = Screens.HomeScreenRoute.route)}
+            )
         }
     }
 }

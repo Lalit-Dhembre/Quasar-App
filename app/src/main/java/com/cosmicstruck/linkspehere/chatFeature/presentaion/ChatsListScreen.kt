@@ -6,13 +6,14 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
-import androidx.core.content.ContextCompat.startActivity
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.cosmicstruck.linkspehere.chatFeature.presentaion.MessageScreenActivity.Companion.KEY_CHANNEL_ID
 import com.cosmicstruck.linkspehere.common.uicomponents.SharedScaffold
 import io.getstream.chat.android.compose.ui.channels.ChannelsScreen
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
@@ -26,6 +27,7 @@ fun ChatsListScreen(
 ) {
     val state = viewModel.chatListScreenState.value
     val context = LocalContext.current
+    val activity = remember { context }
     SharedScaffold(
         navHostController = navHostController,
         content = { it ->
@@ -52,21 +54,16 @@ fun ChatsListScreen(
                 ChatTheme() {
                     ChannelsScreen(
                         viewModelFactory = ChannelViewModelFactory(
-
                         ),
                         title = "Forums",
-                        isShowingHeader = false,
-                        onChannelClick = {it1->
-                            Intent(
-                                context,
-                                MessageScreenActivity::class.java
-                            ).also { it->
-                                it.putExtra(
-                                    MessageScreenActivity.KEY_CHANNEL_ID,
-                                    it1.cid
-                                )
-                                startActivity(context,it,null)
+                        isShowingHeader = true,
+                        onChannelClick = { it1 ->
+                            val intent = Intent(
+                                activity, MessageScreenActivity::class.java
+                            ).apply {
+                                putExtra(KEY_CHANNEL_ID, it1.cid)
                             }
+                            activity.startActivity(intent)
                         },
                     )
                 }

@@ -6,5 +6,6 @@ enum class Screens(val route: String) {
     LoginScreenRoute(route = "login_screen"),
     MentorListScreenRoute(route = "mentor_list_screen"),
     JobSectionScreenRoute(route = "job_section_route"),
-    ChatScreenRoute(route = "chat_screen_route")
+    ChatScreenRoute(route = "chat_screen_route"),
+    ProfileBuildingScreen(route = "profile_building_route")
 }
